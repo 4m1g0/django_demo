@@ -1,0 +1,10 @@
+{% if galleries %}
+    <ul>
+        {% for gallery in galleries %}
+        <!-- the keyword used in the url patter is the one specified in the urls file appended after the app_name in the same file -->
+        <li><a href="{% url 'gallery:detail' gallery.id %}">{{ gallery.name }}</a></li>
+        {% endfor %} 
+    </ul>
+{% else %}
+    <h2>You don't have any gallery yet</h2>
+{% endif %}
