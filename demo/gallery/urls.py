@@ -5,4 +5,5 @@ app_name = 'gallery' # important to include all names inside the namespace for t
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^(?P<id>[0-9]+)$', views.detail, name='detail'),
 ]
