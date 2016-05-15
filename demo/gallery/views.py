@@ -1,5 +1,6 @@
 from django.shortcuts import render
 #from django.http import HttpResponse
+from django.http import Http404
 from .models import Gallery
 #from django.template import loader
 
@@ -28,5 +29,8 @@ def index(request):
     
 
 def detail(request, id):
-    #return HttpResponse("This is the details page of gallery: " + str(id))
-    # this don't work in this commit
+    try:
+        gallery = Gallery.objects.get(pk=id)
+    except Gallery.DoesNotExist:
+        raise Http404("This gallery does not exists")
+    return render(request, 'gallery/details.html', {'gallery':gallery})
