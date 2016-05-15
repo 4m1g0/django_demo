@@ -1,6 +1,6 @@
 from django.shortcuts import render
 #from django.http import HttpResponse
-from django.http import Http404
+from django.http import Http404, HttpResponseBadRequest
 from .models import Gallery
 #from django.template import loader
 
@@ -26,6 +26,17 @@ def index(request):
     galleries = Gallery.objects.all()
     context = {'galleries' : galleries}
     return render(request, 'gallery/index.html', context)
+
+def create(request):
+    try:
+        gallery = Gallery()
+        gallery.name = request.POST['name']
+        gallery.description = request.POST['description']
+        gallery.save()
+    except (KeyError):
+        return HttpResponseBadRequest("Error al recibir el formulario")
+        
+    return index(request)
     
 
 def detail(request, id):
