@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+#from django.http import HttpResponse
 from .models import Gallery
-from django.template import loader
+#from django.template import loader
 
 #def index(request):
 #    galleries = Gallery.objects.all()
@@ -12,15 +12,21 @@ from django.template import loader
 #        
 #    return HttpResponse(html)
 
+#def index(request):
+#    galleries = Gallery.objects.all()
+#    template = loader.get_template('gallery/index.html')
+#    context = {
+#        'galleries' : galleries
+#    }
+#    
+#    return HttpResponse(template.render(context, request))
+
 def index(request):
     galleries = Gallery.objects.all()
-    template = loader.get_template('gallery/index.html')
-    context = {
-        'galleries' : galleries
-    }
-    
-    return HttpResponse(template.render(context, request))
+    context = {'galleries' : galleries}
+    return render(request, 'gallery/index.html', context)
     
 
 def detail(request, id):
-    return HttpResponse("This is the details page of gallery: " + str(id))
+    #return HttpResponse("This is the details page of gallery: " + str(id))
+    # this don't work in this commit
