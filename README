@@ -1,0 +1,28 @@
+dnf install python3
+dnf install pip3
+
+dnf install python3-django
+
+dnf install python-virtualenv
+
+virtualenv -p python3 venv
+
+source venv/bin/activate # activate virtual env (inside here python points to python3)
+
+pip3 install django # install django inside the virtual env
+ 
+python3-django-admin startproject djangodemo
+
+python3 manage.py runserver
+
+python3 manage.py startapp galery
+
+python3 manage.py migrate (crea los modelos de datos a partir de los modelos de django)
+
+now we should add the app to the settings.py with the name off the function in apps.py inside the app
+
+python3 manage.py makemmigrations galery # this generate the sql file or whatever to make de migration
+
+python3 manage.py manage.py sqlmigrate galery 0001 # this shows the sql file
+
+python3 manage.py migrate
