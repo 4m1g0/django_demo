@@ -2,6 +2,7 @@ from django.shortcuts import render
 #from django.http import HttpResponse
 from django.http import Http404, HttpResponseBadRequest
 from .models import Gallery
+from django.views.generic import View
 #from django.template import loader
 
 #def index(request):
@@ -22,22 +23,38 @@ from .models import Gallery
 #    
 #    return HttpResponse(template.render(context, request))
 
-def index(request):
-    galleries = Gallery.objects.all()
-    context = {'galleries' : galleries}
-    return render(request, 'gallery/index.html', context)
+#def index(request):
+#    galleries = Gallery.objects.all()
+#    context = {'galleries' : galleries}
+#    return render(request, 'gallery/index.html', context)
 
-def create(request):
-    try:
-        gallery = Gallery()
-        gallery.name = request.POST['name']
-        gallery.description = request.POST['description']
-        gallery.save()
-    except (KeyError):
-        return HttpResponseBadRequest("Error al recibir el formulario")
-        
-    return index(request)
+#def create(request):
+#    try:
+#        gallery = Gallery()
+#        gallery.name = request.POST['name']
+#        gallery.description = request.POST['description']
+#        gallery.save()
+#    except (KeyError):
+#        return HttpResponseBadRequest("Error al recibir el formulario")
+#        
+#    return index(request)
+
+class index(View):
+    def get(self, request):
+        galleries = Gallery.objects.all()
+        context = {'galleries' : galleries}
+        return render(request, 'gallery/index.html', context)
     
+    def post(self, request):
+        try:
+            gallery = Gallery()
+            gallery.name = request.POST['name']
+            gallery.description = request.POST['description']
+            gallery.save()
+        except (KeyError):
+            return HttpResponseBadRequest("Error al recibir el formulario")
+            
+        return self.get(request)
 
 def detail(request, id):
     try:

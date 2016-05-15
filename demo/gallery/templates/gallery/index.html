@@ -8,7 +8,7 @@
 {% else %}
     <h2>You don't have any gallery yet</h2>
 {% endif %}
-<form action="{% url 'gallery:create' %}" method="post">
+<form action="{% url 'gallery:index' %}" method="post">
     {% csrf_token %}
     name: <input type="text" name="name" /> <br />
     description: <input type="text" name="description" /> <br />
