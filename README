@@ -26,3 +26,8 @@ python3 manage.py makemmigrations galery # this generate the sql file or whateve
 python3 manage.py manage.py sqlmigrate galery 0001 # this shows the sql file
 
 python3 manage.py migrate
+
+#interesting way of adding elements to a subset: gallery1.photo_set.create(name='Art museum1', description='Here we are taking a selfie in front of the art museum')
+# we should specify the foreign key without capital leter and _set, that object allow us to access the subset of photos and create new ones
+
+
